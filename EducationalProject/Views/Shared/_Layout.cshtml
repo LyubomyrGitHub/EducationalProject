@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using EducationalProject.DataInfo
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -20,6 +21,36 @@
                     </section>
                     <nav>
                         <ul id="menu">
+                            @{
+                                var roleName = Roles.GetRolesForUser().FirstOrDefault();
+                                if (roleName != null)
+                                {
+                                    var roleType =
+                                        (RoleType) Enum.Parse(typeof (RoleType), roleName);
+                                    switch (roleType)
+                                    {
+                                        case RoleType.Admin:
+                                        {
+                                            <li>@Html.ActionLink("AdminSpace", "AdminSpace", "Admin")</li>
+                                            break;
+                                        }
+                                        case RoleType.Teacher:
+                                        {
+                                            <li>@Html.ActionLink("TeacherSpace", "TeacherSpace", "Teacher")</li>
+                                            break;
+                                        }
+                                        case RoleType.User:
+                                        {
+                                            <li>@Html.ActionLink("UserSpace", "UserSpace", "User")</li>
+                                            break;
+                                        }
+                                        default:
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <li>@Html.ActionLink("About", "About", "Home")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>

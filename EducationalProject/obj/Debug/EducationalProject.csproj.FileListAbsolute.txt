@@ -187,6 +187,6 @@ D:\educational\trunk\EducationalProject\EducationalProject\bin\ko\System.Spatial
 D:\educational\trunk\EducationalProject\EducationalProject\bin\ru\System.Spatial.resources.dll
 D:\educational\trunk\EducationalProject\EducationalProject\bin\zh-Hans\System.Spatial.resources.dll
 D:\educational\trunk\EducationalProject\EducationalProject\bin\zh-Hant\System.Spatial.resources.dll
-D:\educational\trunk\EducationalProject\EducationalProject\obj\Debug\EducationalProject.csprojResolveAssemblyReference.cache
 D:\educational\trunk\EducationalProject\EducationalProject\obj\Debug\EducationalProject.dll
 D:\educational\trunk\EducationalProject\EducationalProject\obj\Debug\EducationalProject.pdb
+D:\educational\trunk\EducationalProject\EducationalProject\obj\Debug\EducationalProject.csprojResolveAssemblyReference.cache

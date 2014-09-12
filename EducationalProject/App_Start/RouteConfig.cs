@@ -16,7 +16,7 @@ namespace EducationalProject
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "RolePermissions", id = UrlParameter.Optional }
             );
         }
     }
