@@ -21,7 +21,7 @@ namespace EducationalProject.Controllers
                     (RoleType) Enum.Parse(typeof (RoleType), roleName);
                 switch (roleType)
                 {
-                    case RoleType.Admin:
+                    case RoleType.Administrator:
                     {
                         return RedirectToAction("AdminSpace", "Admin");
                     }

@@ -7,7 +7,7 @@ namespace EducationalProject.DataInfo
 {
     public enum RoleType
     {
-        Admin,
+        Administrator,
         Teacher,
         User
     }
