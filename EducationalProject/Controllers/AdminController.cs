@@ -8,7 +8,7 @@ namespace EducationalProject.Controllers
 {
     public class AdminController : Controller
     {
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult AdminSpace()
         {
             return View();
