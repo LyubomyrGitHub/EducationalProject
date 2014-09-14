@@ -65,5 +65,12 @@ namespace EducationalProject.Controllers
             ViewBag.Message = "Your contact page.";
             return View(contacts);
         }
+
+        public ActionResult Literature()
+        {
+            var booksSections = db.BookSections.ToList();
+            ViewBag.Message = "Your contact page.";
+            return View(db);
+        }
     }
 }

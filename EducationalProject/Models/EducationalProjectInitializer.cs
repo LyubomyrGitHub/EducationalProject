@@ -10,6 +10,8 @@ namespace EducationalProject.Models
     {
         protected override void Seed(EducationalProjectContext context)
         {
+
+            //CONTACTs
             var contacts = new List<Contact>
             {
                 new Contact {Address = "7 Naukova St., Building G <br/> Lviv 79060, Ukraine", Fax = "+380 32 244-7002", Map = "", OfficeName = "ELEKS Global Headquarters</br>ELEKS, Ltd.", Phone1 = "+380 32 297-1251 ", Phone2 = "phone2"},
@@ -23,6 +25,68 @@ namespace EducationalProject.Models
             {
                 context.Contacts.Add(contact);
             }
+
+            //BookSections
+            var sections = new List<BookSection>
+            {
+                new BookSection {Name = "For all"},
+                new BookSection {Name = "C#"},
+                new BookSection {Name = "C"},
+                new BookSection {Name = "C++"},
+                new BookSection {Name = "Java"},
+                new BookSection {Name = "Javascript"},
+                new BookSection {Name = "QA/Testing"}
+            };
+
+
+            //BOOKs
+            var books = new List<Book>
+            {
+                new Book()
+                {
+                    Name = "Applied Microsoft .NET Framework Programming",
+                    Author = "Jeffrey Richter",
+                    Description = "",
+                    BookSection = sections.ElementAt(1),
+                    Link = ""
+                },
+                new Book()
+                {
+                    Name = "The C Programming Language",
+                    Author = "Kernighan and Dennis Ritchie",
+                    Description = "",
+                    BookSection = sections.ElementAt(2),
+                    Link = "http://www.amazon.com/Windows-via-Jeffrey-M-Richter/dp/0735624240/"
+                },
+                new Book()
+                {
+                    Name = "Essential C++",
+                    Author = "Stanley B. Lippman",
+                    Description = "",
+                    BookSection = sections.ElementAt(3),
+                    Link = ""
+                },
+                new Book()
+                {
+                    Name = "Windows via C/C++",
+                    Author = "Jeffrey Richter",
+                    Description = "",
+                    BookSection = sections.ElementAt(3),
+                    Link = "http://www.amazon.com/The-Programming-Language-2nd-Edition/dp/0131103628"
+                }
+            };
+
+            foreach (var section in sections)
+            {
+                context.BookSections.Add(section);
+            }
+
+            foreach (var book in books)
+            {
+                context.Books.Add(book);
+            }
+
+
 
             context.SaveChanges();
         }

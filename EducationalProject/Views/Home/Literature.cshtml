@@ -1,0 +1,66 @@
+﻿@using EducationalProject.Models
+@model EducationalProject.Models.EducationalProjectContext
+
+@{
+    ViewBag.Title = "Literature";
+}
+
+<h2>Literature</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+
+        
+        @{
+            List<BookSection> sections = Model.BookSections.ToList();
+            foreach (var section in sections)
+            {
+                <div class="section"></div>
+                @Html.Raw(section.Name)
+                 <br/>
+
+
+                var q =
+                from c in sections
+                from o in c.BookList.ToList()
+                where c.Name == section.Name
+                select o;
+
+
+
+                foreach (var k in q)
+                {
+                    string link = (k.Link == "") ? "#" : k.Link;
+                    <a href="@link">
+                        @k.Author
+                        @k.Name
+                        @k.Description
+                    </a>
+                    <br/>
+                }
+                
+            }
+
+            
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
