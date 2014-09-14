@@ -87,6 +87,45 @@ namespace EducationalProject.Models
             }
 
 
+            //Lectures
+            var lectures = new List<Lecture>
+            {
+                new Lecture()
+                {
+                    Name = "ASP.NET MVC 5 Tutorial - Step by Step ",
+                    Author = "Patrick WashingtonDC",
+                    Description = "Easy to follow ASP.NET MVC and Entity Framework tutorial.",
+                    CreatedOn = "17 трав. 2014",
+                    VideoLink = "https://www.youtube.com/watch?v=VAtVv1Q7ufM&list=WL&index=116",
+                    PdfLink = "",
+                    PresentationLink = ""
+                },
+                new Lecture()
+                {
+                    Name = "ASP.NET Web Pages, Web Forms, and MVC - 14 Roles and Permissions ",
+                    Author = "Tuts+",
+                    Description = "học asp.net MVC với webmatrix và visual studio",
+                    CreatedOn = "20 квіт. 2014",
+                    VideoLink = "https://www.youtube.com/watch?v=JFSIiSWH_J0&list=WL&index=117",
+                    PdfLink = "",
+                    PresentationLink = ""
+                },
+                new Lecture()
+                {
+                    Name = "ASP.NET MVC 5 Tutorial - Step by Step ",
+                    Author = "Patrick WashingtonDC",
+                    Description = "Easy to follow ASP.NET MVC and Entity Framework tutorial.",
+                    CreatedOn = "17 трав. 2014",
+                    VideoLink = "https://www.youtube.com/watch?v=VAtVv1Q7ufM&list=WL&index=116",
+                    PdfLink = "",
+                    PresentationLink = ""
+                },
+            };
+
+            foreach (var lecture in lectures)
+            {
+                context.Lectures.Add(lecture);
+            }
 
             context.SaveChanges();
         }

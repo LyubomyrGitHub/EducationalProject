@@ -11,6 +11,7 @@ namespace EducationalProject.Models
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<BookSection> BookSections { get; set; }
+        public DbSet<Lecture> Lectures { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
