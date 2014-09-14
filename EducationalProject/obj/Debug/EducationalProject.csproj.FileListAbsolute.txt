@@ -219,6 +219,7 @@ D:\Git\EducationalProject\EducationalProject\bin\System.Web.Helpers.dll
 D:\Git\EducationalProject\EducationalProject\bin\System.Web.Http.dll
 D:\Git\EducationalProject\EducationalProject\bin\System.Web.Http.OData.dll
 D:\Git\EducationalProject\EducationalProject\bin\System.Web.Http.WebHost.dll
+D:\Git\EducationalProject\EducationalProject\bin\System.Web.Mvc.dll
 D:\Git\EducationalProject\EducationalProject\bin\System.Web.Optimization.dll
 D:\Git\EducationalProject\EducationalProject\bin\System.Web.Razor.dll
 D:\Git\EducationalProject\EducationalProject\bin\System.Web.WebPages.Deployment.dll
@@ -235,12 +236,12 @@ D:\Git\EducationalProject\EducationalProject\bin\Microsoft.Owin.Security.xml
 D:\Git\EducationalProject\EducationalProject\bin\Microsoft.Web.WebPages.OAuth.xml
 D:\Git\EducationalProject\EducationalProject\bin\Newtonsoft.Json.xml
 D:\Git\EducationalProject\EducationalProject\bin\System.Web.Helpers.xml
+D:\Git\EducationalProject\EducationalProject\bin\System.Web.Mvc.xml
 D:\Git\EducationalProject\EducationalProject\bin\System.Web.Razor.xml
 D:\Git\EducationalProject\EducationalProject\bin\System.Web.WebPages.xml
 D:\Git\EducationalProject\EducationalProject\bin\System.Web.WebPages.Deployment.xml
 D:\Git\EducationalProject\EducationalProject\bin\System.Web.WebPages.Razor.xml
 D:\Git\EducationalProject\EducationalProject\bin\EntityFramework.xml
-D:\Git\EducationalProject\EducationalProject\bin\Microsoft.Web.Infrastructure.xml
 D:\Git\EducationalProject\EducationalProject\bin\System.Net.Http.Formatting.xml
 D:\Git\EducationalProject\EducationalProject\bin\System.Web.Http.xml
 D:\Git\EducationalProject\EducationalProject\bin\System.Web.Http.WebHost.xml
@@ -285,8 +286,6 @@ D:\Git\EducationalProject\EducationalProject\bin\ko\System.Spatial.resources.dll
 D:\Git\EducationalProject\EducationalProject\bin\ru\System.Spatial.resources.dll
 D:\Git\EducationalProject\EducationalProject\bin\zh-Hans\System.Spatial.resources.dll
 D:\Git\EducationalProject\EducationalProject\bin\zh-Hant\System.Spatial.resources.dll
-D:\Git\EducationalProject\EducationalProject\obj\Debug\EducationalProject.csprojResolveAssemblyReference.cache
 D:\Git\EducationalProject\EducationalProject\obj\Debug\EducationalProject.dll
 D:\Git\EducationalProject\EducationalProject\obj\Debug\EducationalProject.pdb
-D:\Git\EducationalProject\EducationalProject\bin\System.Web.Mvc.dll
-D:\Git\EducationalProject\EducationalProject\bin\System.Web.Mvc.xml
+D:\Git\EducationalProject\EducationalProject\obj\Debug\EducationalProject.csprojResolveAssemblyReference.cache

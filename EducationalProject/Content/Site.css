@@ -389,10 +389,6 @@ aside {
     margin: 5px 0 0 10px;
 }
 
-.contact iframe {
-    border: 1px solid #333;
-    margin: 5px 0 0 10px;
-}
 
 /* forms */
 fieldset {
@@ -753,4 +749,22 @@ tr.pager td {
         footer p {
             margin: 0;
         }
+}
+
+
+/*      About       */
+.gmap {
+    margin: 0 auto;
+    display: block;
+    border: 10px solid #333;
+}
+.contact_item {
+    float: left;
+    width: 50%;
+    padding: 20px 0 20px 0;
+}
+
+.contact_h {
+    font-weight: bold;
+    font-size: 1.4em;
 }

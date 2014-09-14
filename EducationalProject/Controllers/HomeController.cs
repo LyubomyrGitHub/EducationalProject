@@ -7,11 +7,14 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Antlr.Runtime.Tree;
 using EducationalProject.DataInfo;
+using EducationalProject.Models;
 
 namespace EducationalProject.Controllers
 {
     public class HomeController : Controller
     {
+
+        EducationalProjectContext db = new EducationalProjectContext();
         public ActionResult RolePermissions()
         {
             var roleName = Roles.GetRolesForUser().FirstOrDefault();
@@ -51,13 +54,16 @@ namespace EducationalProject.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";
+
+
             return View();
         }
 
         public ActionResult Contact()
         {
+            var contacts = db.Contacts.ToList();
             ViewBag.Message = "Your contact page.";
-            return View();
+            return View(contacts);
         }
     }
 }
