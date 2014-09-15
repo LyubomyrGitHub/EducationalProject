@@ -1,7 +1,17 @@
 ﻿
 @{
     ViewBag.Title = "TeacherSpace";
+    ViewBag.MessageUploadStatus = "";
 }
 
-<h2>TeacherSpace</h2>
+    <h2>TeacherSpace</h2>
+<h2>Add new test for testing</h2>
 
+@using (Html.BeginForm("FileUpload", "Teacher", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{    
+    <div style="display: inline-block">            
+        <label for="file">Upload File:</label>
+        <input type="file" name="file" id="file" multiple />
+    </div> 
+   <div style="display: inline-block"> <input type="submit" value="Upload"/></div>
+}

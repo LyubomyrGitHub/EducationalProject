@@ -16,6 +16,10 @@ namespace EducationalProject.Models
         }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Test> Tests { get; set; }
+        public DbSet<Action> Actions { get; set; }
+        public DbSet<TestInProgres> TestsInProgres { get; set; }
+        public DbSet<TestHistory> TestHistory { get; set; }
     }
 
     [Table("UserProfile")]

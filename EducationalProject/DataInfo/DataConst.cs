@@ -7,5 +7,6 @@ namespace EducationalProject.DataInfo
 {
     public static class DataConst
     {
+        public static int PercentLimit = 50;
     }
 }
