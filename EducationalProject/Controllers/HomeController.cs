@@ -15,6 +15,8 @@ namespace EducationalProject.Controllers
     {
 
         EducationalProjectContext db = new EducationalProjectContext();
+        
+
         public ActionResult RolePermissions()
         {
             var roleName = Roles.GetRolesForUser().FirstOrDefault();

@@ -9,18 +9,20 @@
     int counter = 1;
     foreach (var lecture in Model)
     {
-        @:Lecture #
-        @counter
-        <br/>
+        @:<div class="lecture">
+        @:<strong>Lecture #</strong>
+            @counter
+            <br/>
     
-        @:Назва: @lecture.Name   
-        <br />
-        @:Автор: @lecture.Author
-        <br />
-        @:Опис:  @lecture.Description
-        <br />
-        @:Дата створення:  @lecture.CreatedOn
-        <br />
-
+            @:Назва: <strong>@lecture.Name </strong>  
+            <br />
+            @:Автор: @lecture.Author
+            <br />
+            @:Опис:  @lecture.Description
+            <br />
+            @:Дата створення:  @lecture.CreatedOn
+            <br />
+        @:</div>
+        counter++;
     }
 }

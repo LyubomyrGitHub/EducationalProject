@@ -20,35 +20,40 @@
             List<BookSection> sections = Model.BookSections.ToList();
             foreach (var section in sections)
             {
-                <div class="section"></div>
-                @Html.Raw(section.Name)
-                 <br/>
+                @:<div class="section">
+                    @Html.Raw(section.Name)
+                    <hr />
 
 
                 var q =
-                from c in sections
-                from o in c.BookList.ToList()
-                where c.Name == section.Name
-                select o;
+                    from c in sections
+                    from o in c.BookList.ToList()
+                    where c.Name == section.Name
+                    select o;
 
 
 
-                foreach (var k in q)
-                {
+                    foreach (var k in q)
+                    {
                     string link = (k.Link == "") ? "#" : k.Link;
                     <a href="@link">
                         @k.Author
                         @k.Name
                         @k.Description
                     </a>
-                    <br/>
+                    <br />
+                    }
+
+                if (q.Count() == 0)
+                {
+                    @:Empty!
                 }
-                
+               @:</div>
             }
 
             
         }
-
+        
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />

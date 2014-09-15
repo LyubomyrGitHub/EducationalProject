@@ -22,6 +22,7 @@ a {
     text-decoration: underline;
 }
 
+
     a:link, a:visited,
     a:active, a:hover {
         color: #333;
@@ -767,4 +768,18 @@ tr.pager td {
 .contact_h {
     font-weight: bold;
     font-size: 1.4em;
+}
+
+.lecture {
+    padding: 20px;
+    border-radius: 20px;
+    margin: 10px;
+    background-color: rgb(255, 250, 240);
+}
+
+.section {
+    background-color: floralwhite;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 20px;
 }
