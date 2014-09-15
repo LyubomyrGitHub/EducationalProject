@@ -189,4 +189,3 @@ D:\educational\trunk\EducationalProject\EducationalProject\bin\zh-Hans\System.Sp
 D:\educational\trunk\EducationalProject\EducationalProject\bin\zh-Hant\System.Spatial.resources.dll
 D:\educational\trunk\EducationalProject\EducationalProject\obj\Debug\EducationalProject.dll
 D:\educational\trunk\EducationalProject\EducationalProject\obj\Debug\EducationalProject.pdb
-D:\educational\trunk\EducationalProject\EducationalProject\obj\Debug\EducationalProject.csprojResolveAssemblyReference.cache

@@ -214,6 +214,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ActionsModel.cs" />
     <Compile Include="Models\TestModels.cs" />
+    <Compile Include="Models\TestWrappers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataInfo\RoleType.cs" />
     <Compile Include="Startup.cs" />
@@ -292,7 +293,6 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="TestFiles\Simple Test3.xml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -338,6 +338,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="TestFiles\" />
     <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>

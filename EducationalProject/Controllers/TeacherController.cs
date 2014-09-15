@@ -18,7 +18,21 @@ namespace EducationalProject.Controllers
         [Authorize(Roles = "Teacher")]
         public ActionResult TeacherSpace()
         {
-            return View();
+            var testWrappers = new List<TestWrapper>();
+            using (var db = new UsersContext())
+            {
+                var userId = WebSecurity.GetUserId(User.Identity.Name);
+                var testList =
+                    db.Tests.Where(test => test.User.UserId == userId)
+                        .OrderByDescending(date => date.DateDownload)
+                        .ToList().Take(7);
+
+                testWrappers.AddRange(testList.Select(test => new TestWrapper
+                {
+                    TestId = test.TestId, TestName = test.TestName, DateDownload = test.DateDownload, Order = test.Order
+                }));
+            }
+            return View(testWrappers);
         }
 
         [HttpPost]
@@ -60,6 +74,37 @@ namespace EducationalProject.Controllers
         {
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
+        }
+        
+        [HttpGet]
+        [Authorize(Roles = "Teacher")]
+        public ActionResult DeleteTest(int id)
+        {
+            using (var db = new UsersContext())
+            {
+                var test = db.Tests.FirstOrDefault(t => t.TestId == id);
+                db.Tests.Attach(test);
+                var listQuestion = test.Questions.ToList();
+                foreach (var question in listQuestion)
+                {
+                    if (question is QuestionWithVariants)
+                    {
+                        var listVariant = ((QuestionWithVariants) question).VariantAnswers.ToList();
+                        foreach (var variantAnswer in listVariant)
+                        {
+                            db.VariantAnswers.Remove(variantAnswer);
+                        }
+                        db.QuestionWithVariants.Remove((QuestionWithVariants)question);
+                    }
+                    else
+                    {
+                        db.Questions.Remove(question);
+                    }    
+                }
+                db.Tests.Remove(test);
+                db.SaveChanges();
+            }
+            return RedirectToAction("TeacherSpace", "Teacher");
         }
     }
 }
