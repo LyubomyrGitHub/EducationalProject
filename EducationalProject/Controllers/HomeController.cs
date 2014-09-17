@@ -79,5 +79,39 @@ namespace EducationalProject.Controllers
             ViewBag.Message = "Your contact page.";
             return View(lectures);
         }
+        public class BooksWrapper
+        {
+            public string Name { get; set; }
+            public string Author { get; set; }
+            public string Description { get; set; }
+         //   public List<string> Books { get; set; }
+        }
+        public JsonResult GetJson()
+        {
+
+            var data = db.BookSections.ToList();
+
+
+            var collection = data.Select(x => new
+            {
+                x.Name,
+                Books = x.BookList.Select(item => new
+                {
+                    item.Name,
+                    item.Description,
+                    item.Author
+                })
+            }).ToList();
+
+            var bookList = collection.Select(book => new BooksWrapper
+            {
+                Name = book.Name, Author = "autho", Description = "Desc"
+            }).ToList();
+
+            var json = Json(bookList, JsonRequestBehavior.AllowGet);
+
+
+            return json;
+        }
     }
 }

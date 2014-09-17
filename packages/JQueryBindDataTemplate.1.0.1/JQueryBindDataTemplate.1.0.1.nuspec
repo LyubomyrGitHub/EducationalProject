@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>JQueryBindDataTemplate</id>
+    <version>1.0.1</version>
+    <title>JQuery Bind Data Template</title>
+    <authors>Chandra Shekar Thota</authors>
+    <owners>Chandra Shekar Thota</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This template creates a SampleModel, Controller, View and .Js file.</description>
+    <summary>Template for Binding JSON Data from Controller to View</summary>
+    <releaseNotes>Thr initial release. May contain error.</releaseNotes>
+  </metadata>
+</package>

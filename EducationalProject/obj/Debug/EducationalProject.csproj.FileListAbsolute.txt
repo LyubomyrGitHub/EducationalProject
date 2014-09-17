@@ -257,8 +257,6 @@ D:\Git\EducationalProject\EducationalProject\bin\Microsoft.Data.OData.xml
 D:\Git\EducationalProject\EducationalProject\bin\System.Spatial.xml
 D:\Git\EducationalProject\EducationalProject\bin\WebMatrix.Data.xml
 D:\Git\EducationalProject\EducationalProject\bin\WebMatrix.WebData.xml
-D:\Git\EducationalProject\EducationalProject\bin\ru\System.Net.Http.Formatting.resources.dll
-D:\Git\EducationalProject\EducationalProject\bin\ru\System.Web.Http.resources.dll
 D:\Git\EducationalProject\EducationalProject\bin\de\Microsoft.Data.Edm.resources.dll
 D:\Git\EducationalProject\EducationalProject\bin\es\Microsoft.Data.Edm.resources.dll
 D:\Git\EducationalProject\EducationalProject\bin\fr\Microsoft.Data.Edm.resources.dll
