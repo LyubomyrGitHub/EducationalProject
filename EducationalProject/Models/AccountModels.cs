@@ -19,6 +19,7 @@ namespace EducationalProject.Models
         public DbSet<Test> Tests { get; set; }
         public DbSet<Action> Actions { get; set; }
         public DbSet<TestInProgres> TestsInProgres { get; set; }
+        public DbSet<TestResults> TestsResults { get; set; }
         public DbSet<TestHistory> TestHistory { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<QuestionWithVariants> QuestionWithVariants { get; set; }

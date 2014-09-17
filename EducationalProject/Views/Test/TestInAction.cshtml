@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "TestInAction";
+}
+@model EducationalProject.Models.QuestionInProgresWrapper
+
+<h2>TestQuestion</h2>
+<h1>@Model.QuestionText</h1>
+
+@if (Model.TestType == "Checked")
+{
+    <div>
+        @using (Html.BeginForm("NextQuestion", "Test", FormMethod.Post))
+        {
+            for (int index = 0; index < Model.AnswerVariantList.Count; index++)
+            {
+                <ul>
+                    <li>
+                        <div style="display: inline-block"> @Html.CheckBoxFor(m => Model.AnswerVariantList[index].Selected, new {id = "Chk-" + index})</div>
+                        <div style="display: inline-block"> @Html.Label(Model.AnswerVariantList[index].Text, new {@for = "Chk-" + index})</div>
+                        @Html.HiddenFor(m => Model.AnswerVariantList[index].Text)
+                    </li>
+                </ul>
+            }
+            <button type="submit" class="btn">Next</button>
+        }
+    </div>
+}
+
+@if (Model.TestType == "Radio")
+{
+    <div>
+        @using (Html.BeginForm("NextQuestion", "Test", FormMethod.Post))
+        {
+            foreach (var variant in Model.AnswerVariantList)
+              { <ul>
+                    <li>  
+                        @Html.RadioButtonFor(b=>b.SelectedAnswer,variant.VariantId)  @variant.Text 
+                    </li>
+                </ul>
+              }
+            <button type="submit" class="btn">Next</button>
+        }
+    </div>
+}

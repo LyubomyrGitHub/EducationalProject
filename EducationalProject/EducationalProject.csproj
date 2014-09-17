@@ -203,6 +203,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\ResultController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\Utilities\XmlToTestParser.cs" />
     <Compile Include="DataInfo\DataConst.cs" />
@@ -335,11 +336,13 @@
     <Content Include="Views\Teacher\TeacherSpace.cshtml" />
     <Content Include="Views\User\UserSpace.cshtml" />
     <Content Include="Views\Admin\AdminSpace.cshtml" />
+    <Content Include="Views\Test\Tests.cshtml" />
+    <Content Include="Views\Test\TestInAction.cshtml" />
+    <Content Include="Views\Result\Results.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="TestFiles\" />
-    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

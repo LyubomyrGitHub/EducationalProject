@@ -8,5 +8,7 @@ namespace EducationalProject.DataInfo
     public static class DataConst
     {
         public static int PercentLimit = 50;
+        public const string CheckedType = "Checked";
+        public const string RadioType = "Radio";
     }
 }

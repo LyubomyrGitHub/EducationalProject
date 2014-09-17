@@ -39,7 +39,7 @@ namespace EducationalProject.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int QuestionWithVariantsId { get; set; }
-        public virtual ICollection<VariantAnswer> VariantAnswers { get; set; }
+        public virtual IList<VariantAnswer> VariantAnswers { get; set; }
     }
 
     [Table("VariantAnswer")]

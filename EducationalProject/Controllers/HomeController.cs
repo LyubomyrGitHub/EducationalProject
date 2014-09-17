@@ -31,7 +31,7 @@ namespace EducationalProject.Controllers
                     }
                     case RoleType.User:
                     {
-                        return RedirectToAction("UserSpace", "User");
+                         return RedirectToAction("Tests", "Test");
                     }
                     default:
                     {
