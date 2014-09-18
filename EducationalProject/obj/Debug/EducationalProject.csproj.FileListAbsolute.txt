@@ -189,3 +189,7 @@ D:\educational\trunk\EducationalProject\EducationalProject\bin\zh-Hans\System.Sp
 D:\educational\trunk\EducationalProject\EducationalProject\bin\zh-Hant\System.Spatial.resources.dll
 D:\educational\trunk\EducationalProject\EducationalProject\obj\Debug\EducationalProject.dll
 D:\educational\trunk\EducationalProject\EducationalProject\obj\Debug\EducationalProject.pdb
+D:\educational\trunk\EducationalProject\EducationalProject\bin\PagedList.dll
+D:\educational\trunk\EducationalProject\EducationalProject\bin\PagedList.Mvc.dll
+D:\educational\trunk\EducationalProject\EducationalProject\bin\PagedList.xml
+D:\educational\trunk\EducationalProject\EducationalProject\bin\PagedList.Mvc.xml

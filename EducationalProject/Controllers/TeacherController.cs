@@ -25,7 +25,7 @@ namespace EducationalProject.Controllers
                 var testList =
                     db.Tests.Where(test => test.User.UserId == userId)
                         .OrderByDescending(date => date.DateDownload)
-                        .ToList().Take(7);
+                        .ToList();
 
                 testWrappers.AddRange(testList.Select(test => new TestWrapper
                 {
@@ -45,8 +45,8 @@ namespace EducationalProject.Controllers
             for (var index = 0; index < Request.Files.Count; ++index)
             {
                 var file = Request.Files[index];
-                if (file != null && file.ContentLength > 0)
-                {
+                if (file != null && file.ContentLength > 0 && file.ContentType == "text/xml")
+                {   
                     var fileName = Path.GetFileName(file.FileName);
                     var path = Path.Combine(directory, fileName);
                     file.SaveAs(path);
@@ -80,31 +80,38 @@ namespace EducationalProject.Controllers
         [Authorize(Roles = "Teacher")]
         public ActionResult DeleteTest(int id)
         {
-            using (var db = new UsersContext())
+            try
             {
-                var test = db.Tests.FirstOrDefault(t => t.TestId == id);
-                db.Tests.Attach(test);
-                var listQuestion = test.Questions.ToList();
-                foreach (var question in listQuestion)
+                using (var db = new UsersContext())
                 {
-                    if (question is QuestionWithVariants)
+                    var test = db.Tests.FirstOrDefault(t => t.TestId == id);
+                    db.Tests.Attach(test);
+                    var listQuestion = test.Questions.ToList();
+                    foreach (var question in listQuestion)
                     {
-                        var listVariant = ((QuestionWithVariants) question).VariantAnswers.ToList();
-                        foreach (var variantAnswer in listVariant)
+                        if (question is QuestionWithVariants)
                         {
-                            db.VariantAnswers.Remove(variantAnswer);
+                            var listVariant = ((QuestionWithVariants) question).VariantAnswers.ToList();
+                            foreach (var variantAnswer in listVariant)
+                            {
+                                db.VariantAnswers.Remove(variantAnswer);
+                            }
+                            db.QuestionWithVariants.Remove((QuestionWithVariants) question);
                         }
-                        db.QuestionWithVariants.Remove((QuestionWithVariants)question);
+                        else
+                        {
+                            db.Questions.Remove(question);
+                        }
                     }
-                    else
-                    {
-                        db.Questions.Remove(question);
-                    }    
+                    db.Tests.Remove(test);
+                    db.SaveChanges();
                 }
-                db.Tests.Remove(test);
-                db.SaveChanges();
+                return RedirectToAction("TeacherSpace", "Teacher");
             }
-            return RedirectToAction("TeacherSpace", "Teacher");
+            catch (Exception)
+            {
+                return RedirectToAction("TeacherSpace", "Teacher");
+            }
         }
     }
 }

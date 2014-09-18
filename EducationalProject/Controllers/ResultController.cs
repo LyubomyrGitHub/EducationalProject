@@ -18,7 +18,7 @@ namespace EducationalProject.Controllers
             {
                 var userId = WebSecurity.GetUserId(User.Identity.Name);
                 var resultList = db.TestsResults.Where(result=>result.User.UserId==userId)
-                    .OrderByDescending(date => date.DatePassing).ToList().Take(7);
+                    .OrderByDescending(date => date.DatePassing).ToList();
 
                 resultsWrapper.AddRange(resultList.Select(result => new ResultsWrapper
                 {
