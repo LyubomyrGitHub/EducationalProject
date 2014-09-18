@@ -1,5 +1,5 @@
 ﻿@using EducationalProject.Models
-@model EducationalProject.Models.EducationalProjectContext
+@model IEnumerable<EducationalProject.Controllers.HomeController.BooksWrapper>
 
 @{
     ViewBag.Title = "Literature";
@@ -7,14 +7,24 @@
 
 
 
-<script id="bookTemplate" type="text/x-jquery-tmpl">
+@*<script id="bookTemplate" type="text/x-jquery-tmpl">
     <tr>
         <td>${Name}</td>
         <td>${Author}</td>
         <td>${Description}</td>
     </tr>
+</script>*@
+
+
+<script id="bookTemplate" type="text/x-jquery-tmpl">
+    <tr>
+        <td>${BookSection}</td>
+        <td>${Name}</td>
+        <td>${Description}</td>
+        <td>${Author}</td>
+    </tr>
 </script>
-<h2>Literature1</h2>
+<h2 align="center">Literature</h2>
 
 <table border="1" class="simple-little-table">
     <caption>Recommended Literature</caption>
@@ -25,72 +35,18 @@
         <th>Author</th>
     </tr>
     <tbody id="bookList">
-        
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.BookSection</td>
+                <td>@book.Name</td>
+                <td>@book.Description</td>
+                <td>@book.Author</td>
+            </tr>
+        }
     </tbody>
 
 </table>
-
-@*@using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <hr />
-            <table border="1" class="simple-little-table">
-                <caption>Recommended Literature</caption>
-                <tr>
-                    <th>Type</th>
-                    <th>Book Name</th>
-                    <th>Description</th>
-                    <th>Author</th>
-                </tr>
-                <tbody id="bookList1">
-                    @@foreach (var section in Model.BookSections.ToList())
-                    {
-
-                        var q =
-                        from c in Model.BookSections.ToList()
-                        from o in c.BookList.ToList()
-                        where c.Name == section.Name
-                        select o;
-
-
-
-
-                        foreach (var k in q)
-                        {
-                            <tr>
-                                <td>@Html.Raw(section.Name)</td>
-                                <td>@k.Name</td>
-                                <td>@k.Description</td>
-                                <td>@k.Author</td>
-                            </tr>
-                            string link = (k.Link == "") ? "#" : k.Link;
-
-                        }
-                        if (q.Count() == 0)
-                        {
-                            @:Empty!
-                            }
-                    }@
-                </tbody>
-
-            </table>
-
-
-
-            <input type="button" id="btnBook" value="Show Data" />
-            @*<<div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>@
-        </div>
-    }
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>*@
 
 <input type="button" id="btnBook" value="Show Data" />
 <script>

@@ -70,8 +70,26 @@ namespace EducationalProject.Controllers
 
         public ActionResult Literature()
         {
+
+            var data = db.BookSections.ToList();
+            var books = db.Books;
+
+            var q =
+                from e in data
+                from et in db.Books.ToList()
+                where e.BookSectionId == et.BookSectionId
+                select
+                    new BooksWrapper()
+                    {
+                        Name = et.Name,
+                        Author = et.Author,
+                        BookSection = e.Name,
+                        Description = et.Description
+                    };
+            q = q.ToList();
+
             ViewBag.Message = "Your contact page.";
-            return View(db);
+            return View(q);
         }
         public ActionResult Lectures()
         {
@@ -84,31 +102,46 @@ namespace EducationalProject.Controllers
             public string Name { get; set; }
             public string Author { get; set; }
             public string Description { get; set; }
+            public string BookSection { get; set; }
          //   public List<string> Books { get; set; }
         }
         public JsonResult GetJson()
         {
 
             var data = db.BookSections.ToList();
+            var books = db.Books;
 
+            var q =
+                from e in data
+                from et in db.Books.ToList()
+                where e.BookSectionId == et.BookSectionId
+                select
+                    new BooksWrapper()
+                    {
+                        Name = et.Name,
+                        Author = et.Author,
+                        BookSection = e.Name,
+                        Description = et.Description
+                    };
+            q = q.ToList();
+            //var collection = data.Select(x => new
+            //{
+            //    x.Name,
+            //    Books = books.Select(item => new
+            //    {
+            //        item.Name,
+            //        item.Description,
+            //        item.Author
+            //    }).Where(x.BookSectionId == sectionid)
+                
+            //});
 
-            var collection = data.Select(x => new
-            {
-                x.Name,
-                Books = x.BookList.Select(item => new
-                {
-                    item.Name,
-                    item.Description,
-                    item.Author
-                })
-            }).ToList();
+            //var bookList = collection.Select(book => new BooksWrapper
+            //{
+            //    Name = book.Name, Author = "autho", Description = "Desc"
+            //}).ToList();
 
-            var bookList = collection.Select(book => new BooksWrapper
-            {
-                Name = book.Name, Author = "autho", Description = "Desc"
-            }).ToList();
-
-            var json = Json(bookList, JsonRequestBehavior.AllowGet);
+            var json = Json(q, JsonRequestBehavior.AllowGet);
 
 
             return json;
