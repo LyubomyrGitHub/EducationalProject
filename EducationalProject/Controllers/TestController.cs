@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using EducationalProject.DataInfo;
 using EducationalProject.Models;
 using Microsoft.Ajax.Utilities;
+using Microsoft.SqlServer.Server;
 using WebMatrix.WebData;
 using Action = EducationalProject.Models.Action;
 
@@ -21,7 +22,7 @@ namespace EducationalProject.Controllers
             {
                 var testInfoList =
                     db.Tests.OrderByDescending(date => date.DateDownload)
-                        .ToList().Take(7);
+                        .ToList();
 
                 testWrappers.AddRange(testInfoList.Select(test => new TestInfoWrapper
                 {
@@ -43,7 +44,7 @@ namespace EducationalProject.Controllers
                 if (test == null) {return RedirectToAction("RolePermissions", "Home");}
                 var userId = WebSecurity.GetUserId(User.Identity.Name);
                 var actionInProgress = db.Actions.FirstOrDefault(a => a.User.UserId == userId && a.Status == 1);
-                if (actionInProgress != null)
+                if (actionInProgress != null || test.Questions.Count == 0)
                 {
                     return RedirectToAction("Tests", "Test");
                 }
@@ -68,11 +69,11 @@ namespace EducationalProject.Controllers
                 db.Actions.Add(action);
                 db.SaveChanges();
             }
-            return RedirectToAction("TestInAction", "Test");
+            return RedirectToAction("TestInAction", "Test", new {number = 1});
         }
 
         [Authorize(Roles = "User")]
-        public ActionResult TestInAction()
+        public ActionResult TestInAction(int number)
         {
             using (var db = new UsersContext())
             {
@@ -81,111 +82,115 @@ namespace EducationalProject.Controllers
                 if (action != null)
                 {
                     var currentQeustion =
-                        action.TestsInProgres.Where(t => t.Submitted == false)
-                          .OrderBy(q => q.Question.Number)
-                            .FirstOrDefault();
+                        action.TestsInProgres.FirstOrDefault(q => q.Question.Number==number);
                     if (currentQeustion != null)
                     {
                         if (currentQeustion.Question is QuestionWithVariants)
                         {
-                            var questionInProgres = new QuestionInProgresWrapper()
-                            {
-                                TestType = currentQeustion.Question.TestType,
-                                QuestionText = currentQeustion.Question.Text,
-                                AnswerVariantList = new List<VariantItem>(),
-                                QuestionCount = ((QuestionWithVariants)currentQeustion.Question).VariantAnswers.Count
-                            };
-                            foreach (var variant in ((QuestionWithVariants)currentQeustion.Question).VariantAnswers)
-                            {
-                                questionInProgres.AnswerVariantList.Add(new VariantItem
-                                {
-                                    Text = variant.Text,
-                                    Selected = false,
-                                    VariantId =
-                                        ((QuestionWithVariants) currentQeustion.Question).VariantAnswers.IndexOf(variant)
-                                });
-                            }
+                            var questionInProgres = new QuestionInProgresWrapper(number, currentQeustion, action);
                             return View(questionInProgres);
                         }
                     }
                 }
-            } 
+            }
+            ViewBag.WarningMessage = DataConst.WarningMessageForTest;
             return RedirectToAction("Tests", "Test");
         }
 
-       
         [HttpPost]
         [Authorize(Roles = "User")]
-        public ActionResult NextQuestion(QuestionInProgresWrapper result)
+        public ActionResult GoToQuestion(QuestionInProgresWrapper result, string submit)
         {
             using (var db = new UsersContext())
             {
                 var userId = WebSecurity.GetUserId(User.Identity.Name);
                 var action = db.Actions.FirstOrDefault(a => a.User.UserId == userId && a.Status == 1);
-                if (action != null)
+                var response = new ResponseAction(submit);
+                if (action != null && response.CurrentNumber != null)
                 {
                     var currentQuestion =
-                        action.TestsInProgres.Where(t => t.Submitted == false)
-                          .OrderBy(q => q.Question.Number)
-                            .FirstOrDefault();
+                        action.TestsInProgres.FirstOrDefault(q => q.Question.Number == response.CurrentNumber);
                     if (currentQuestion != null)
                     {
-                       return CheckCurrentQuestion(result, userId, action, currentQuestion, db);
+                       return CheckCurrentQuestion(result, response, userId, action, currentQuestion, db);
                     }
                 }
-            } 
-            return RedirectToAction("TestInAction", "Test");
+            }
+            ViewBag.WarningMessage = DataConst.WarningMessageForTest;
+            return RedirectToAction("TestInAction", "Test", new { number = 1 });
         }
 
-        private ActionResult CheckCurrentQuestion(QuestionInProgresWrapper result, int userId, Action action,
-            TestInProgres currentQuestion, UsersContext db)
+        private ActionResult CheckCurrentQuestion(QuestionInProgresWrapper result, ResponseAction response, int userId,
+            Action action, TestInProgres currentQuestion, UsersContext db)
         {
             try
             {
                 if (currentQuestion.Question.TestType == DataConst.CheckedType)
                 {
-
                     SaveResultOfCheckedQuestion(result, currentQuestion, db);
-                    if (ChekTestByEnd(userId, action, db))
-                    {
-                        return RedirectToAction("Results", "Result");
-                    }
-
                 }
                 if (currentQuestion.Question.TestType == DataConst.RadioType)
                 {
-
                     SaveResultOfRadioQuestion(result, currentQuestion, db);
-                    if (ChekTestByEnd(userId, action, db))
-                    {
-                        return RedirectToAction("Results", "Result");
-                    }
                 }
-                return RedirectToAction("TestInAction", "Test");
+               return ExecuteCommand(response, userId, action, currentQuestion, db);
             }
             catch (Exception)
             {
-                return RedirectToAction("TestInAction", "Test");
+                ViewBag.WarningMessage = DataConst.WarningErrorMessage;
+                return RedirectToAction("TestInAction", "Test", new { number = 1 });
             }
         }
 
-        private bool ChekTestByEnd(int userId, Action action, UsersContext db)
+        private ActionResult ExecuteCommand(ResponseAction response, int userId,
+            Action action, TestInProgres currentQuestion, UsersContext db
+            )
         {
-            var currentQeustion =
-                        action.TestsInProgres.Where(t => t.Submitted == false)
-                          .OrderBy(q => q.Question.Number)
-                            .FirstOrDefault();
-            if (currentQeustion == null)
+            switch (response.Command)
             {
+                case DataConst.Subbmit:
+                {
+                    SubbmitTest(userId, currentQuestion, action, db);
+                    return RedirectToAction("Results", "Result");
+                }
+                case DataConst.Next:
+                {
+                    if (response.CurrentNumber.HasValue)
+                    {
+                        return RedirectToAction("TestInAction", "Test", new { number = response.CurrentNumber + 1});
+                    }
+                    break;
+                }
+                case DataConst.Prev:
+                {
+                    if (response.CurrentNumber.HasValue)
+                    {
+                        return RedirectToAction("TestInAction", "Test", new { number = response.CurrentNumber - 1 });
+                    }
+                    break;
+                }
+                case DataConst.GoTo:
+                {
+                    if (response.GoTo.HasValue)
+                    {
+                        return RedirectToAction("TestInAction", "Test", new { number = response.GoTo });
+                    }
+                    break;
+                }
+            }
+            ViewBag.WarningMessage = DataConst.WarningErrorMessage;
+            return RedirectToAction("TestInAction", "Test", new { number = 1 });
+        }
+
+        private void SubbmitTest(int userId, TestInProgres currentQuestion, Action action, UsersContext db)
+        {
+                currentQuestion.Submitted = true;
                 action.DatePassing = DateTime.Now;
                 action.Status = 2;
                 db.SaveChanges();
                 CalculateResult(userId, action, db);
                 CopyToHistory(action, db);
                 RemoveFromProgres(action, db);
-                return true;
-            }
-            return false;
         }
 
 
@@ -201,17 +206,20 @@ namespace EducationalProject.Controllers
             double pointSum = 0;
             foreach (var test in action.TestsInProgres)
             {
-                switch (test.Question.TestType)
+                if (test.UserAnswer != null)
                 {
-                    case DataConst.CheckedType:
+                    switch (test.Question.TestType)
                     {
-                        pointSum += (CalculateChecked(test));
-                        break;
-                    }
-                    case DataConst.RadioType:
-                    {
-                        pointSum += (CalculateRadio(test));
-                        break;
+                        case DataConst.CheckedType:
+                        {
+                            pointSum += (CalculateChecked(test));
+                            break;
+                        }
+                        case DataConst.RadioType:
+                        {
+                            pointSum += (CalculateRadio(test));
+                            break;
+                        }
                     }
                 }
             }
@@ -281,7 +289,7 @@ namespace EducationalProject.Controllers
             db.SaveChanges();
         }
 
-        private double CalculateChecked(TestInProgres test)
+        private static double CalculateChecked(TestInProgres test)
         {
             if (test.UserAnswer.Count() != test.Question.Answer.Count())
             {
@@ -289,28 +297,31 @@ namespace EducationalProject.Controllers
             }
             var answerPoints = 0;
             var userPoints = 0;
-            for (int index = 0; index < test.Question.Answer.Count(); ++index)
+            if (test.UserAnswer != null)
             {
-                if (test.Question.Answer[index] == '1')
+                for (int index = 0; index < test.Question.Answer.Count(); ++index)
                 {
-                    ++answerPoints;
-                    switch (test.UserAnswer[index])
+                    if (test.Question.Answer[index] == '1')
                     {
-                        case '1':
-                            ++userPoints;
-                            break;
-                        default:
-                            --userPoints;
-                            break;
+                        ++answerPoints;
+                        switch (test.UserAnswer[index])
+                        {
+                            case '1':
+                                ++userPoints;
+                                break;
+                            default:
+                                --userPoints;
+                                break;
+                        }
                     }
-                }
-                else
-                {
-                    switch (test.UserAnswer[index])
+                    else
                     {
-                        case '1':
-                            --userPoints;
-                            break;
+                        switch (test.UserAnswer[index])
+                        {
+                            case '1':
+                                --userPoints;
+                                break;
+                        }
                     }
                 }
             }
@@ -319,7 +330,11 @@ namespace EducationalProject.Controllers
 
         private static double CalculateRadio(TestInProgres test)
         {
-            return test.Question.Answer == test.UserAnswer ? 1 : 0;
+            if (test.UserAnswer != null)
+            {
+                return test.Question.Answer == test.UserAnswer ? 1 : 0;
+            }
+            return 0;
         }
     }
 }

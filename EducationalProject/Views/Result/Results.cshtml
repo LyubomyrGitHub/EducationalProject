@@ -10,7 +10,8 @@
             <th class="tableHeader">Test</th>
             <th class="tableHeader">Date</th>
             <th class="tableHeader">Passed</th>
-            <th class="tableHeader">Percent taken</th>
+             <th class="tableHeader">Percent taken</th>
+             <th>Details</th>
          </tr>
     @foreach (var item in Model)
     {
@@ -18,8 +19,8 @@
               <td class="tableCell">@item.TestName</td>
               <td class="tableCell">@item.DatePassing</td>
               <td class="tableCell">@item.Passed</td>           
-              <td class="tableCell">@item.PercentTaken</td>
+              <td class="tableCell">@item.PercentTaken%</td>
+              <td>@Html.ActionLink("Details", "DetailsResult", new { testResultId = item.TestResultId})</td>
          </tr>
     }
  </table>
-

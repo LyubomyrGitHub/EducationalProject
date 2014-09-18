@@ -754,3 +754,25 @@ tr.pager td {
             margin: 0;
         }
 }
+
+.statusBar {
+    position: absolute;
+    text-align: left;
+    margin-left: -120px;
+    margin-top: -300px;
+    float: left;
+}
+
+.active {
+    background-color: #7ac0da;
+    margin-top: 10px;
+    width: 65px;
+}
+.noactive {
+     margin-top: 10px;
+     width: 65px;
+}
+
+.subbmitBtn {
+    margin-top: 20px;
+}

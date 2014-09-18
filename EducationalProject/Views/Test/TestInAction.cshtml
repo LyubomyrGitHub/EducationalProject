@@ -9,7 +9,7 @@
 @if (Model.TestType == "Checked")
 {
     <div>
-        @using (Html.BeginForm("NextQuestion", "Test", FormMethod.Post))
+        @using (Html.BeginForm("GoToQuestion", "Test", FormMethod.Post))
         {
             for (int index = 0; index < Model.AnswerVariantList.Count; index++)
             {
@@ -21,7 +21,32 @@
                     </li>
                 </ul>
             }
-            <button type="submit" class="btn">Next</button>
+            if (Model.HasPrev)
+            {
+                <button type="submit" name="submit" value="Prev;@Model.Number">Prev</button>
+            }
+            if (Model.HasNext)
+            {
+                <button type="submit" name="submit" value="Next;@Model.Number">Next</button>
+            }       
+            <div class="statusBar">
+                @foreach (var status in Model.StatusList)
+                {
+                    if (status.IsActive)
+                    {
+                        <div><button type="submit" name="submit" class="active"
+                            value="GoTo;@Model.Number;@status.Number">@status.Number</button></div>
+                    }
+                    else
+                    {
+                        <div><button type="submit" name="submit" class="noactive"
+                            value="GoTo;@Model.Number;@status.Number">@status.Number</button></div>
+                    }
+                }
+                <div><button type="submit" name="submit" value="Subbmit;@Model.Number" class="subbmitBtn"  
+                             onclick="return confirm('Are you sure you want to submit?')">Subbmit</button>
+                </div>
+            </div>
         }
     </div>
 }
@@ -29,7 +54,7 @@
 @if (Model.TestType == "Radio")
 {
     <div>
-        @using (Html.BeginForm("NextQuestion", "Test", FormMethod.Post))
+        @using (Html.BeginForm("GoToQuestion", "Test", FormMethod.Post))
         {
             foreach (var variant in Model.AnswerVariantList)
               { <ul>
@@ -38,7 +63,32 @@
                     </li>
                 </ul>
               }
-            <button type="submit" class="btn">Next</button>
+            if (Model.HasPrev)
+            {
+                <button type="submit" name="submit" value="Prev;@Model.Number">Prev</button>
+            }
+            if (Model.HasNext)
+            {
+                <button type="submit" name="submit" value="Next;@Model.Number">Next</button>
+            }
+            <div class="statusBar">
+                @foreach (var status in Model.StatusList)
+                {
+                    if (status.IsActive)
+                    {
+                        <div><button type="submit" name="submit" class="active"
+                            value="GoTo;@Model.Number;@status.Number">@status.Number</button></div>
+                    }
+                    else
+                    {
+                        <div><button type="submit" name="submit"class="noactive"
+                            value="GoTo;@Model.Number;@status.Number">@status.Number</button></div>
+                    }
+                }
+                <div><button type="submit" name="submit" value="Subbmit;@Model.Number" class="subbmitBtn"  
+                             onclick="return confirm('Are you sure you want to submit?')">Subbmit</button>
+                </div>
+            </div>
         }
     </div>
 }

@@ -19,7 +19,7 @@ namespace EducationalProject.Models
         public int? Status { get; set; }
         public DateTime? DateOpened { get; set; }
         public DateTime? DateClosed { get; set; }
-        public virtual ICollection<TestInProgres> TestsInProgres { get; set; } 
+        public virtual IList<TestInProgres> TestsInProgres { get; set; } 
     }
 
     [Table("TestInProgres")]
