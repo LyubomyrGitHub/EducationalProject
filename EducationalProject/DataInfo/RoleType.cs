@@ -9,6 +9,7 @@ namespace EducationalProject.DataInfo
     {
         Administrator,
         Teacher,
-        User
+        User,
+        None
     }
 }

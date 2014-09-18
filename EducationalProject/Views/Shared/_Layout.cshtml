@@ -33,18 +33,37 @@
                                     {
                                         case RoleType.Administrator:
                                         {
-                                            <li>@Html.ActionLink("AdminSpace", "AdminSpace", "Admin")</li>
+                                            <li>@Html.ActionLink("New Users", "GetUsers", "Admin")</li>
+                                            <li>@Html.ActionLink("Users", "GetAllUsers", "Admin")</li>
+                                            <li>@Html.ActionLink("Roles", "RoleIndex", "Admin")</li>
+                                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                                             break;
                                         }
                                         case RoleType.Teacher:
                                         {
                                             <li>@Html.ActionLink("TeacherSpace", "TeacherSpace", "Teacher")</li>
+                                            <li>@Html.ActionLink("Literature", "Literature", "Home")</li>
+                                            <li>@Html.ActionLink("Lectures", "Lectures", "Home")</li>
+                                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                                             break;
                                         }
                                         case RoleType.User:
                                         {
                                             <li>@Html.ActionLink("Test", "Tests", "Test")</li>
                                             <li>@Html.ActionLink("Results", "Results", "Result")</li>
+                                            <li>@Html.ActionLink("Lectures", "Lectures", "Home")</li>
+                                            <li>@Html.ActionLink("Literature", "Literature", "Home")</li>
+                                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                                            break;
+                                        }
+                                        case RoleType.None:
+                                        {
+                                            <li>@Html.ActionLink("Welcome", "NoneSpace", "None")</li>
+                                            <li>@Html.ActionLink("Literature", "Literature", "Home")</li>
+                                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                                             break;
                                         }
                                         default:
@@ -53,10 +72,7 @@
                                         }
                                     }
                                 }
-                            }
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            }       
                         </ul>
                     </nav>
                 </div>

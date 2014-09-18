@@ -79,8 +79,13 @@ namespace EducationalProject.Controllers
                 // Attempt to register the user
                 try
                 {
+                    
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                    if (!Roles.RoleExists("None"))
+                        Roles.CreateRole("None");
+                    Roles.AddUserToRole(model.UserName, "None");
                     WebSecurity.Login(model.UserName, model.Password);
+                    
                     return RedirectToAction("RolePermissions", "Home");
                 }
                 catch (MembershipCreateUserException e)
