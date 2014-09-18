@@ -287,3 +287,7 @@ D:\Git\EducationalProject\EducationalProject\bin\zh-Hant\System.Spatial.resource
 D:\Git\EducationalProject\EducationalProject\obj\Debug\EducationalProject.dll
 D:\Git\EducationalProject\EducationalProject\obj\Debug\EducationalProject.pdb
 D:\Git\EducationalProject\EducationalProject\obj\Debug\EducationalProject.csprojResolveAssemblyReference.cache
+D:\Git\EducationalProject\EducationalProject\bin\PagedList.dll
+D:\Git\EducationalProject\EducationalProject\bin\PagedList.Mvc.dll
+D:\Git\EducationalProject\EducationalProject\bin\PagedList.xml
+D:\Git\EducationalProject\EducationalProject\bin\PagedList.Mvc.xml

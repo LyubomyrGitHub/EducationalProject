@@ -1,5 +1,6 @@
 ﻿@using EducationalProject.Models
-@model IEnumerable<EducationalProject.Controllers.HomeController.BooksWrapper>
+@using PagedList.Mvc;
+@model PagedList.IPagedList<EducationalProject.Controllers.HomeController.BooksWrapper>
 
 @{
     ViewBag.Title = "Literature";
@@ -26,10 +27,21 @@
 </script>
 <h2 align="center">Literature</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm("Literature", "Home", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <table border="1" class="simple-little-table">
     <caption>Recommended Literature</caption>
     <tr>
-        <th>Type</th>
+        <th>@Html.ActionLink("Type", "Literature", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })</th>
         <th>Book Name</th>
         <th>Description</th>
         <th>Author</th>
@@ -42,11 +54,25 @@
                 <td>@book.Name</td>
                 <td>@book.Description</td>
                 <td>@book.Author</td>
+                <td>
+                    @if (User.IsInRole("Administrator") || User.IsInRole("Teacher"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = book.BookId }) 
+                        @Html.ActionLink("Details", "Details", new { id = book.BookId }) 
+                        @Html.ActionLink("Delete", "Delete", new { id = book.BookId })
+                    }
+                </td>
             </tr>
         }
     </tbody>
 
 </table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Literature",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
 <input type="button" id="btnBook" value="Show Data" />
 <script>
