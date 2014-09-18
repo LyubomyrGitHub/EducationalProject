@@ -136,8 +136,6 @@ namespace EducationalProject.Controllers
             int pageNumber = (page ?? 1);
             return View(q.ToPagedList(pageNumber, pageSize));
 
-            //ViewBag.Message = "Your contact page.";
-            //return View(q);
         }
         public ActionResult Lectures()
         {
@@ -174,22 +172,6 @@ namespace EducationalProject.Controllers
                         BookId = et.BookId
                     };
             q = q.ToList();
-            //var collection = data.Select(x => new
-            //{
-            //    x.Name,
-            //    Books = books.Select(item => new
-            //    {
-            //        item.Name,
-            //        item.Description,
-            //        item.Author
-            //    }).Where(x.BookSectionId == sectionid)
-                
-            //});
-
-            //var bookList = collection.Select(book => new BooksWrapper
-            //{
-            //    Name = book.Name, Author = "autho", Description = "Desc"
-            //}).ToList();
 
             var json = Json(q, JsonRequestBehavior.AllowGet);
 
@@ -236,13 +218,17 @@ namespace EducationalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BookId, Author, Name, Description, BookSectionId")]Book book)
+        public ActionResult Edit([Bind(Include = "Author, Name, Description, BookSectionId")]Book book)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    db.Entry(book).State = EntityState.Modified;
+                    var dbbook = db.Books.FirstOrDefault(b => b.BookId == book.BookId);
+                    dbbook.Author = book.Author;
+                    dbbook.BookSectionId = book.BookSectionId;
+                    dbbook.Name = book.Name;
+                    dbbook.Description = book.Description;
                     db.SaveChanges();
                     return RedirectToAction("Literature");
                 }
@@ -294,5 +280,37 @@ namespace EducationalProject.Controllers
             }
             return RedirectToAction("Literature");
         }
+
+        // GET: /Student/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: /Student/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Author, Name, Description, BookSectionId")]Book book)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Books.Add(book);
+                    db.SaveChanges();
+                    return RedirectToAction("Literature");
+                }
+            }
+            catch (Exception ex /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", ex.Message);
+                //ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+            return View(book);
+        }
+
     }
 }

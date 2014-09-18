@@ -8,15 +8,6 @@
 
 
 
-@*<script id="bookTemplate" type="text/x-jquery-tmpl">
-    <tr>
-        <td>${Name}</td>
-        <td>${Author}</td>
-        <td>${Description}</td>
-    </tr>
-</script>*@
-
-
 <script id="bookTemplate" type="text/x-jquery-tmpl">
     <tr>
         <td>${BookSection}</td>
@@ -54,14 +45,13 @@
                 <td>@book.Name</td>
                 <td>@book.Description</td>
                 <td>@book.Author</td>
-                <td>
                     @if (User.IsInRole("Administrator") || User.IsInRole("Teacher"))
                     {
-                        @Html.ActionLink("Edit", "Edit", new { id = book.BookId }) 
-                        @Html.ActionLink("Details", "Details", new { id = book.BookId }) 
-                        @Html.ActionLink("Delete", "Delete", new { id = book.BookId })
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = book.BookId })
+                            @Html.ActionLink("Delete", "Delete", new { id = book.BookId })
+                        </td>
                     }
-                </td>
             </tr>
         }
     </tbody>
@@ -80,39 +70,9 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
       
         $.getJSON("/Home/GetJson/", function (data) {
 
-            //debugger;
-            //$('#bookTemplate').tmpl(data).appendTo("#bookList");
             $("#bookList").html($("#bookTemplate").tmpl(data));
            
         });
     });
-    function showBooks(e) {
-        
-        $.getJSON("/Home/GetJson/", function (data) {
-
-            debugger;
-            //$("#bookTemplate").tmpl(data).appendTo("#bookList");
-            //   $("#bookList")//.html($("#bookTemplate").tmpl(data));
-            debugger;
-        });
-        //$.ajax({
-        //    // Get Faculty PartialView
-        //    url: "/Home/FacultiesToPVDemo",
-        //    type: 'Get',
-        //    data: { courseName: selectedCourseName },
-        //    success: function (data) {
-        //        $("#facultyDetailTable").empty().append(data);
-        //    },
-        //    error: function () {
-        //        alert("something seems wrong");
-        //    }
-        //});
-    }
-
-    function GetDate(jsonDate) {
-        var value = new Date(parseInt(jsonDate.substr(6)));
-        return value.getMonth() + 1 + "/" + value.getDate() + "/" + value.getFullYear();
-    }
-
 
 </script>
