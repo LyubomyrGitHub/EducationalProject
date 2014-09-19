@@ -714,18 +714,6 @@
             </summary>
             <param name="value">The <see cref="T:System.Uri"/> value to write.</param>
         </member>
-        <member name="M:Newtonsoft.Json.JsonWriter.WriteValue(System.Numerics.BigInteger)">
-            <summary>
-            Writes a <see cref="T:System.Numerics.BigInteger"/> value.
-            </summary>
-            <param name="value">The <see cref="T:System.Numerics.BigInteger"/> value to write.</param>
-        </member>
-        <member name="M:Newtonsoft.Json.JsonWriter.WriteValue(System.Nullable{System.Numerics.BigInteger})">
-            <summary>
-            Writes a <see cref="T:System.Nullable`1"/> value.
-            </summary>
-            <param name="value">The <see cref="T:System.Nullable`1"/> value to write.</param>
-        </member>
         <member name="M:Newtonsoft.Json.JsonWriter.WriteValue(System.Object)">
             <summary>
             Writes a <see cref="T:System.Object"/> value.
@@ -744,6 +732,13 @@
             Writes out the given white space.
             </summary>
             <param name="ws">The string of white space characters.</param>
+        </member>
+        <member name="M:Newtonsoft.Json.JsonWriter.SetWriteState(Newtonsoft.Json.JsonToken,System.Object)">
+            <summary>
+            Sets the state of the JsonWriter,
+            </summary>
+            <param name="token">The JsonToken being written.</param>
+            <param name="value">The value being written.</param>
         </member>
         <member name="P:Newtonsoft.Json.JsonWriter.CloseOutput">
             <summary>
@@ -876,6 +871,13 @@
             Closes this stream and the underlying stream.
             </summary>
         </member>
+        <member name="M:Newtonsoft.Json.Bson.BsonWriter.WriteValue(System.Object)">
+            <summary>
+            Writes a <see cref="T:System.Object"/> value.
+            An error will raised if the value cannot be written as a single JSON token.
+            </summary>
+            <param name="value">The <see cref="T:System.Object"/> value to write.</param>
+        </member>
         <member name="M:Newtonsoft.Json.Bson.BsonWriter.WriteNull">
             <summary>
             Writes a null value.
@@ -1005,12 +1007,6 @@
             Writes a <see cref="T:System.Uri"/> value.
             </summary>
             <param name="value">The <see cref="T:System.Uri"/> value to write.</param>
-        </member>
-        <member name="M:Newtonsoft.Json.Bson.BsonWriter.WriteValue(System.Numerics.BigInteger)">
-            <summary>
-            Writes a <see cref="T:System.Numerics.BigInteger"/> value.
-            </summary>
-            <param name="value">The <see cref="T:System.Numerics.BigInteger"/> value to write.</param>
         </member>
         <member name="M:Newtonsoft.Json.Bson.BsonWriter.WriteObjectId(System.Byte[])">
             <summary>
@@ -2019,13 +2015,6 @@
             </summary>
             <param name="value">The value to convert.</param>
             <returns>A JSON string representation of the <see cref="T:System.Int64"/>.</returns>
-        </member>
-        <member name="M:Newtonsoft.Json.JsonConvert.ToString(System.Numerics.BigInteger)">
-            <summary>
-            Converts the <see cref="T:System.Numerics.BigInteger"/>  to its JSON string representation.
-            </summary>
-            <param name="value">The value to convert.</param>
-            <returns>A JSON string representation of the <see cref="T:System.Numerics.BigInteger"/>.</returns>
         </member>
         <member name="M:Newtonsoft.Json.JsonConvert.ToString(System.UInt64)">
             <summary>
@@ -3378,6 +3367,13 @@
             Writes an indent space.
             </summary>
         </member>
+        <member name="M:Newtonsoft.Json.JsonTextWriter.WriteValue(System.Object)">
+            <summary>
+            Writes a <see cref="T:System.Object"/> value.
+            An error will raised if the value cannot be written as a single JSON token.
+            </summary>
+            <param name="value">The <see cref="T:System.Object"/> value to write.</param>
+        </member>
         <member name="M:Newtonsoft.Json.JsonTextWriter.WriteNull">
             <summary>
             Writes a null value.
@@ -3525,12 +3521,6 @@
             Writes a <see cref="T:System.Uri"/> value.
             </summary>
             <param name="value">The <see cref="T:System.Uri"/> value to write.</param>
-        </member>
-        <member name="M:Newtonsoft.Json.JsonTextWriter.WriteValue(System.Numerics.BigInteger)">
-            <summary>
-            Writes a <see cref="T:System.Numerics.BigInteger"/> value.
-            </summary>
-            <param name="value">The <see cref="T:System.Numerics.BigInteger"/> value to write.</param>
         </member>
         <member name="M:Newtonsoft.Json.JsonTextWriter.WriteComment(System.String)">
             <summary>
@@ -4293,20 +4283,6 @@
             <param name="value">The value.</param>
             <returns>The result of the conversion.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Linq.JToken.op_Explicit(Newtonsoft.Json.Linq.JToken)~System.Numerics.BigInteger">
-            <summary>
-            Performs an explicit conversion from <see cref="T:Newtonsoft.Json.Linq.JToken"/> to <see cref="T:System.Numerics.BigInteger"/>.
-            </summary>
-            <param name="value">The value.</param>
-            <returns>The result of the conversion.</returns>
-        </member>
-        <member name="M:Newtonsoft.Json.Linq.JToken.op_Explicit(Newtonsoft.Json.Linq.JToken)~System.Nullable{System.Numerics.BigInteger}">
-            <summary>
-            Performs an explicit conversion from <see cref="T:Newtonsoft.Json.Linq.JToken"/> to <see cref="T:System.Nullable`1"/>.
-            </summary>
-            <param name="value">The value.</param>
-            <returns>The result of the conversion.</returns>
-        </member>
         <member name="M:Newtonsoft.Json.Linq.JToken.op_Implicit(System.Boolean)~Newtonsoft.Json.Linq.JToken">
             <summary>
             Performs an implicit conversion from <see cref="T:System.Boolean"/> to <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
@@ -4447,13 +4423,6 @@
             <param name="value">The value to create a <see cref="T:Newtonsoft.Json.Linq.JValue"/> from.</param>
             <returns>The <see cref="T:Newtonsoft.Json.Linq.JValue"/> initialized with the specified value.</returns>
         </member>
-        <member name="M:Newtonsoft.Json.Linq.JToken.op_Implicit(System.Nullable{System.Numerics.BigInteger})~Newtonsoft.Json.Linq.JToken">
-            <summary>
-            Performs an implicit conversion from <see cref="T:System.Nullable`1"/> to <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
-            </summary>
-            <param name="value">The value to create a <see cref="T:Newtonsoft.Json.Linq.JValue"/> from.</param>
-            <returns>The <see cref="T:Newtonsoft.Json.Linq.JValue"/> initialized with the specified value.</returns>
-        </member>
         <member name="M:Newtonsoft.Json.Linq.JToken.op_Implicit(System.Double)~Newtonsoft.Json.Linq.JToken">
             <summary>
             Performs an implicit conversion from <see cref="T:System.Double"/> to <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
@@ -4492,13 +4461,6 @@
         <member name="M:Newtonsoft.Json.Linq.JToken.op_Implicit(System.Byte[])~Newtonsoft.Json.Linq.JToken">
             <summary>
             Performs an implicit conversion from <see cref="T:System.Byte[]"/> to <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
-            </summary>
-            <param name="value">The value to create a <see cref="T:Newtonsoft.Json.Linq.JValue"/> from.</param>
-            <returns>The <see cref="T:Newtonsoft.Json.Linq.JValue"/> initialized with the specified value.</returns>
-        </member>
-        <member name="M:Newtonsoft.Json.Linq.JToken.op_Implicit(System.Numerics.BigInteger)~Newtonsoft.Json.Linq.JToken">
-            <summary>
-            Performs an implicit conversion from <see cref="T:System.Numerics.BigInteger"/> to <see cref="T:Newtonsoft.Json.Linq.JToken"/>.
             </summary>
             <param name="value">The value to create a <see cref="T:Newtonsoft.Json.Linq.JValue"/> from.</param>
             <returns>The <see cref="T:Newtonsoft.Json.Linq.JValue"/> initialized with the specified value.</returns>
@@ -6057,6 +6019,13 @@
             </summary>
             <param name="name">The name of the property.</param>
         </member>
+        <member name="M:Newtonsoft.Json.Linq.JTokenWriter.WriteValue(System.Object)">
+            <summary>
+            Writes a <see cref="T:System.Object"/> value.
+            An error will raised if the value cannot be written as a single JSON token.
+            </summary>
+            <param name="value">The <see cref="T:System.Object"/> value to write.</param>
+        </member>
         <member name="M:Newtonsoft.Json.Linq.JTokenWriter.WriteNull">
             <summary>
             Writes a null value.
@@ -6198,12 +6167,6 @@
             Writes a <see cref="T:System.Uri"/> value.
             </summary>
             <param name="value">The <see cref="T:System.Uri"/> value to write.</param>
-        </member>
-        <member name="M:Newtonsoft.Json.Linq.JTokenWriter.WriteValue(System.Numerics.BigInteger)">
-            <summary>
-            Writes a <see cref="T:System.Numerics.BigInteger"/> value.
-            </summary>
-            <param name="value">The <see cref="T:System.Numerics.BigInteger"/> value to write.</param>
         </member>
         <member name="P:Newtonsoft.Json.Linq.JTokenWriter.Token">
             <summary>
@@ -7315,6 +7278,31 @@
             Gets the error context.
             </summary>
             <value>The error context.</value>
+        </member>
+        <member name="T:Newtonsoft.Json.Serialization.ExpressionValueProvider">
+            <summary>
+            Get and set values for a <see cref="T:System.Reflection.MemberInfo"/> using dynamic methods.
+            </summary>
+        </member>
+        <member name="M:Newtonsoft.Json.Serialization.ExpressionValueProvider.#ctor(System.Reflection.MemberInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Newtonsoft.Json.Serialization.ExpressionValueProvider"/> class.
+            </summary>
+            <param name="memberInfo">The member info.</param>
+        </member>
+        <member name="M:Newtonsoft.Json.Serialization.ExpressionValueProvider.SetValue(System.Object,System.Object)">
+            <summary>
+            Sets the value.
+            </summary>
+            <param name="target">The target to set the value on.</param>
+            <param name="value">The value to set on the target.</param>
+        </member>
+        <member name="M:Newtonsoft.Json.Serialization.ExpressionValueProvider.GetValue(System.Object)">
+            <summary>
+            Gets the value.
+            </summary>
+            <param name="target">The target to get the value from.</param>
+            <returns>The value.</returns>
         </member>
         <member name="T:Newtonsoft.Json.Serialization.JsonArrayContract">
             <summary>
