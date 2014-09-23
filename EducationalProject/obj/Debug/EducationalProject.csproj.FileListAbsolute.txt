@@ -196,3 +196,4 @@ D:\educational\trunk\EducationalProject\EducationalProject\bin\PagedList.Mvc.xml
 D:\educational\trunk\EducationalProject\EducationalProject\bin\WebActivatorEx.dll
 D:\educational\trunk\EducationalProject\EducationalProject\bin\Antlr3.Runtime.pdb
 D:\educational\trunk\EducationalProject\EducationalProject\bin\System.Web.Optimization.xml
+D:\educational\trunk\EducationalProject\EducationalProject\obj\Debug\EducationalProject.csprojResolveAssemblyReference.cache

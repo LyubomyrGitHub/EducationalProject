@@ -8,17 +8,17 @@
 <h2>Passed: @Model.Passed</h2>
 <h2>Percent taken: @Model.PercentTaken%</h2>
 
-   @foreach (var question in Model.QuestionsList)
+@foreach (var question in Model.QuestionsList)
    {
        <h1>@question.QuestionText</h1>
-       
+    
        if (question.Type == DataConst.RadioType)
        {
            <table class="table table-bordered  table-striped">
                <thead>
                    <tr>
-                       <th class="tableHeader">YourAnswer</th>
-                       <th class="tableHeader">TrueAnswer</th>
+                       <th>YourAnswer</th>
+                       <th>TrueAnswer</th>
                        <th></th>
                    </tr> 
                </thead>
@@ -39,8 +39,8 @@
            <table class="table table-bordered  table-striped">
                <thead>
                    <tr>
-                       <th class="tableHeader">YourAnswer</th>
-                       <th class="tableHeader">TrueAnswer</th>
+                       <th>YourAnswer</th>
+                       <th>TrueAnswer</th>
                        <th></th>
                    </tr>
                </thead>
