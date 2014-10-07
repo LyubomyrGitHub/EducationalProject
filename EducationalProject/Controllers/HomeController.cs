@@ -14,7 +14,7 @@ namespace EducationalProject.Controllers
 {
     public class HomeController : Controller
     {
-        EducationalProjectContext db = new EducationalProjectContext();
+        ApplicationDbContext db = new ApplicationDbContext();
 
         public ActionResult RolePermissions()
         {

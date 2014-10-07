@@ -21,7 +21,7 @@ namespace EducationalProject.Controllers
         [Authorize(Roles = "Administrator")]
         public ViewResult Indexer(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var db = new UsersContext();
+            var db = new ApplicationDbContext();
 
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -211,7 +211,7 @@ namespace EducationalProject.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult GetAllUsers()
         {
-            var db = new UsersContext();
+            var db = new ApplicationDbContext();
 
             var users = db.UserProfiles.ToList();
             //var users = Roles.GetUsersInRole("None");

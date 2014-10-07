@@ -19,7 +19,7 @@ namespace EducationalProject.Controllers
         public ActionResult TeacherSpace()
         {
             var testWrappers = new List<TestWrapper>();
-            using (var db = new UsersContext())
+            using (var db = new ApplicationDbContext())
             {
                 var userId = WebSecurity.GetUserId(User.Identity.Name);
                 var testList =
@@ -50,7 +50,7 @@ namespace EducationalProject.Controllers
                     var fileName = Path.GetFileName(file.FileName);
                     var path = Path.Combine(directory, fileName);
                     file.SaveAs(path);
-                    using (var db = new UsersContext())
+                    using (var db = new ApplicationDbContext())
                     {
                         try
                         {
@@ -82,7 +82,7 @@ namespace EducationalProject.Controllers
         {
             try
             {
-                using (var db = new UsersContext())
+                using (var db = new ApplicationDbContext())
                 {
                     var test = db.Tests.FirstOrDefault(t => t.TestId == id);
                     db.Tests.Attach(test);

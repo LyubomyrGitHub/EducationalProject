@@ -6,9 +6,9 @@ using System.Web;
 
 namespace EducationalProject.Models
 {
-    public class EducationalProjectInitializer : DropCreateDatabaseAlways<EducationalProjectContext>
+    public class EducationalProjectInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
     {
-        protected override void Seed(EducationalProjectContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
 
             //CONTACTs

@@ -5,14 +5,14 @@ namespace EducationalProject.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<EducationalProject.Models.UsersContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<EducationalProject.Models.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(EducationalProject.Models.UsersContext context)
+        protected override void Seed(EducationalProject.Models.ApplicationDbContext context)
         {
         }
     }

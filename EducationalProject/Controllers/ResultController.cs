@@ -14,7 +14,7 @@ namespace EducationalProject.Controllers
         public ActionResult Results()
         {
             var resultsWrapper = new List<ResultsWrapper>();
-            using (var db = new UsersContext())
+            using (var db = new ApplicationDbContext())
             {
                 var userId = WebSecurity.GetUserId(User.Identity.Name);
                 var resultList = db.TestsResults.Where(result=>result.User.UserId==userId)
@@ -37,7 +37,7 @@ namespace EducationalProject.Controllers
         public ActionResult DetailsResult(int testResultId)
         {
             var detailsWrapper = new DetailsResultWrapper();
-            using (var db = new UsersContext())
+            using (var db = new ApplicationDbContext())
             {
                 var userId = WebSecurity.GetUserId(User.Identity.Name);
                 var testResult =

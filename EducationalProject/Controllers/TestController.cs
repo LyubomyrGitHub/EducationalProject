@@ -18,7 +18,7 @@ namespace EducationalProject.Controllers
         public ActionResult Tests()
         {
             var testWrappers = new List<TestInfoWrapper>();
-            using (var db = new UsersContext())
+            using (var db = new ApplicationDbContext())
             {
                 var testInfoList =
                     db.Tests.OrderByDescending(date => date.DateDownload)
@@ -38,7 +38,7 @@ namespace EducationalProject.Controllers
         [Authorize(Roles = "User")]
         public ActionResult StartTest(int id)
         {
-            using (var db = new UsersContext())
+            using (var db = new ApplicationDbContext())
             {
                 var test = db.Tests.FirstOrDefault(t => t.TestId == id);
                 if (test == null) {return RedirectToAction("RolePermissions", "Home");}
@@ -75,7 +75,7 @@ namespace EducationalProject.Controllers
         [Authorize(Roles = "User")]
         public ActionResult TestInAction(int number)
         {
-            using (var db = new UsersContext())
+            using (var db = new ApplicationDbContext())
             {
                 var userId = WebSecurity.GetUserId(User.Identity.Name);
                 var action = db.Actions.FirstOrDefault(a => a.User.UserId == userId && a.Status == 1);
@@ -101,7 +101,7 @@ namespace EducationalProject.Controllers
         [Authorize(Roles = "User")]
         public ActionResult GoToQuestion(QuestionInProgresWrapper result, string submit)
         {
-            using (var db = new UsersContext())
+            using (var db = new ApplicationDbContext())
             {
                 var userId = WebSecurity.GetUserId(User.Identity.Name);
                 var action = db.Actions.FirstOrDefault(a => a.User.UserId == userId && a.Status == 1);
@@ -121,7 +121,7 @@ namespace EducationalProject.Controllers
         }
 
         private ActionResult CheckCurrentQuestion(QuestionInProgresWrapper result, ResponseAction response, int userId,
-            Action action, TestInProgres currentQuestion, UsersContext db)
+            Action action, TestInProgres currentQuestion, ApplicationDbContext db)
         {
             try
             {
@@ -143,7 +143,7 @@ namespace EducationalProject.Controllers
         }
 
         private ActionResult ExecuteCommand(ResponseAction response, int userId,
-            Action action, TestInProgres currentQuestion, UsersContext db
+            Action action, TestInProgres currentQuestion, ApplicationDbContext db
             )
         {
             switch (response.Command)
@@ -182,7 +182,7 @@ namespace EducationalProject.Controllers
             return RedirectToAction("TestInAction", "Test", new { number = 1 });
         }
 
-        private void SubbmitTest(int userId, TestInProgres currentQuestion, Action action, UsersContext db)
+        private void SubbmitTest(int userId, TestInProgres currentQuestion, Action action, ApplicationDbContext db)
         {
                 currentQuestion.Submitted = true;
                 action.DatePassing = DateTime.Now;
@@ -194,7 +194,7 @@ namespace EducationalProject.Controllers
         }
 
 
-        private void CalculateResult(int userId, Action action, UsersContext db)
+        private void CalculateResult(int userId, Action action, ApplicationDbContext db)
         {
             var testResult = new TestResults
             {
@@ -229,7 +229,7 @@ namespace EducationalProject.Controllers
             db.SaveChanges();
         }
 
-        private void CopyToHistory(Action action, UsersContext db)
+        private void CopyToHistory(Action action, ApplicationDbContext db)
         {
             foreach (var test in action.TestsInProgres)
             {
@@ -245,7 +245,7 @@ namespace EducationalProject.Controllers
             }
         }
 
-        private void RemoveFromProgres(Action action, UsersContext db)
+        private void RemoveFromProgres(Action action, ApplicationDbContext db)
         {
             db.Actions.Attach(action);
 
@@ -259,7 +259,7 @@ namespace EducationalProject.Controllers
             db.SaveChanges(); 
         }
 
-        private void SaveResultOfCheckedQuestion(QuestionInProgresWrapper result, TestInProgres currentQuestion, UsersContext db)
+        private void SaveResultOfCheckedQuestion(QuestionInProgresWrapper result, TestInProgres currentQuestion, ApplicationDbContext db)
         {
             var userAnswer = result.AnswerVariantList.Aggregate("",
                                 (current, res) => current + (res.Selected ? "1" : "0"));
@@ -268,7 +268,7 @@ namespace EducationalProject.Controllers
             db.SaveChanges();
         }
 
-        private void SaveResultOfRadioQuestion(QuestionInProgresWrapper result, TestInProgres currentQuestion, UsersContext db)
+        private void SaveResultOfRadioQuestion(QuestionInProgresWrapper result, TestInProgres currentQuestion, ApplicationDbContext db)
         {
             var userAnswer = "";
 

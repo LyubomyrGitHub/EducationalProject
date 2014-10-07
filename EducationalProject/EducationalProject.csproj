@@ -225,11 +225,11 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ActionsModel.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\BookSection.cs" />
     <Compile Include="Models\BooksWrapper.cs" />
     <Compile Include="Models\Contact.cs" />
-    <Compile Include="Models\EducationalProjectContext.cs" />
     <Compile Include="Models\EducationalProjectInitializer.cs" />
     <Compile Include="Models\Lecture.cs" />
     <Compile Include="Models\TestModels.cs" />
@@ -1140,6 +1140,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-2.0.3.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -25,11 +25,11 @@ namespace EducationalProject.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
+                Database.SetInitializer<ApplicationDbContext>(null);
 
                 try
                 {
-                    using (var context = new UsersContext())
+                    using (var context = new ApplicationDbContext())
                     {
                         if (!context.Database.Exists())
                         {
