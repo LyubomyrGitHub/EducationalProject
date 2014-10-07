@@ -6,7 +6,7 @@ using System.Web;
 
 namespace EducationalProject.Models
 {
-    public partial class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext()
             : base("DefaultConnection")
@@ -14,7 +14,6 @@ namespace EducationalProject.Models
         }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
-
 
         public DbSet<Test> Tests { get; set; }
         public DbSet<Action> Actions { get; set; }
