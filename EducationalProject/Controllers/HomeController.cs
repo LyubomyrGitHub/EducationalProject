@@ -15,6 +15,7 @@ namespace EducationalProject.Controllers
     public class HomeController : Controller
     {
         EducationalProjectContext db = new EducationalProjectContext();
+
         public ActionResult RolePermissions()
         {
             var roleName = Roles.GetRolesForUser().FirstOrDefault();
@@ -140,15 +141,7 @@ namespace EducationalProject.Controllers
             ViewBag.Message = "Your contact page.";
             return View(lectures);
         }
-        public class BooksWrapper
-        {
-            public string Name { get; set; }
-            public string Author { get; set; }
-            public string Description { get; set; }
-            public string BookSection { get; set; }
-            public int BookId { get; set; }
-            //   public List<string> Books { get; set; }
-        }
+
         public JsonResult GetJson()
         {
 
