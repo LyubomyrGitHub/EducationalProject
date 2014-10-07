@@ -227,6 +227,7 @@
     <Compile Include="Models\ActionsModel.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\BookSection.cs" />
+    <Compile Include="Models\BooksWrapper.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\EducationalProjectContext.cs" />
     <Compile Include="Models\EducationalProjectInitializer.cs" />
