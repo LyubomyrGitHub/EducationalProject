@@ -15,7 +15,8 @@ namespace EducationalProject.Controllers.Utilities
             xtr.Read();
             test.TestName =  xtr.GetAttribute("testname");
             test.Order = xtr.GetAttribute("order");
-            
+            test.Duration = Int32.Parse(xtr.GetAttribute("duration"));
+
             test.Questions=new List<Question>();
             while (!xtr.EOF)
             {

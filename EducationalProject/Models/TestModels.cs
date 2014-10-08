@@ -17,7 +17,8 @@ namespace EducationalProject.Models
         public DateTime? DateDownload { get; set; }
         public UserProfile User { get; set; }
         public string Order { get; set; }
-        public virtual ICollection<Question> Questions { get; set; } 
+        public virtual ICollection<Question> Questions { get; set; }
+        public int Duration { get; set; } // minutes
     }
 
     [Table("Question")]
